@@ -10,13 +10,34 @@
 </head>
 <body>
   <h1>OMBD Fun</h1>
-  <div>
-    <h1>Movies</h1>
-    <p id="harry"></p>
-    <!-- <ul id="movies">
 
-    </ul> -->
+  <div>
+    <form id="form1" method="post">
+      <label>Title contains:<input type="text" id="titleContains"></label>
+      <input type="submit">
+    </form>
   </div>
-  <!-- <div id="detail">Detail</div> -->
+
+  <div>
+    <table>
+      <thead>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Year</th>
+        <th>imdbID</th>
+      </thead>
+      <tbody class="movieAll">
+
+      </tbody>
+    </table>
+  </div>
+<!--   <div>
+    <h1>Movies</h1>
+    <p class="showMovies"></p>
+    <ul id="movies">
+
+    </ul>
+  </div>
+  <div id="detail">Detail</div> -->
 </body>
 </html>
