@@ -8,15 +8,16 @@
       }).done(function(data) {
         var movie, movies, _i, _len, _results;
         movies = $.parseJSON(data)['Search'];
+        $('.temp').remove();
         _results = [];
         for (_i = 0, _len = movies.length; _i < _len; _i++) {
           movie = movies[_i];
-          _results.push($(".movieAll").replaceAll("<tr><td>" + movie.Title + "</td> <td>" + movie.Type + "</td> <td>" + movie.Year + "</td><td>" + movie.imdbID + "</td></tr>"));
+          _results.push($(".movieAll").append("<div class=\"temp\"> <div class=\"row\"> <div class=\"col-md-6\"> " + movie.Title + " </div> <div class=\"col-md-2\"> " + movie.Year + " </div> <div class=\"col-md-2\"> " + movie.Type + " </div> <div class=\"col-md-2\"> " + movie.imdbID + " </div> </div> </div>"));
         }
         return _results;
       });
     };
-    return $('#form1').on('submit', function(event) {
+    return $('#formSearch').on('submit', function(event) {
       var movieSearch;
       event.preventDefault();
       movieSearch = $('#titleContains').val();

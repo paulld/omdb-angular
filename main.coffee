@@ -1,36 +1,46 @@
 $ ->
 
+  # clearMovies = (list) ->
+  #   list = html('')
+
   master = (title) ->
     $.ajax
       url: "http://www.omdbapi.com/?s=#{title}"
-      # url: "http://www.omdbapi.com/?s=Harry"
     .done (data) ->
       movies = $.parseJSON(data)['Search']
       # console.log movies
-      # console.log movies.Title
+      $('.temp').remove()
       for movie in movies
-        # console.log movie.Year
-        # console.log movie.Type
-        # console.log movie.imdbID
-        # $(".movieAll").remove()
-        $(".movieAll").append "<tr><td>#{movie.Title}</td>
-        <td>#{movie.Type}</td>
-        <td>#{movie.Year}</td><td>#{movie.imdbID}</td></tr>"
+        $(".movieAll").append "<div class=\"temp\">
+                                <div class=\"row\">
+                                  <div class=\"col-md-6\">
+                                    #{movie.Title}
+                                  </div>
+                                  <div class=\"col-md-2\">
+                                    #{movie.Year}
+                                  </div>
+                                  <div class=\"col-md-2\">
+                                    #{movie.Type}
+                                  </div>
+                                  <div class=\"col-md-2\">
+                                    #{movie.imdbID}
+                                  </div>
+                                </div>
+                              </div>"
 
 
-  # master("Tom")
+  # searchByID = (id) ->
+  #   $.ajax
+  #     # url: "http://www.omdbapi.com/?i=tt1285016"
+  #     newUrl: "http://www.omdbapi.com/?i=#{id}"
+  #   .done (data) ->
+  #     details = $.parseJSON(data)
+  #   console.log details
 
-    # clearMovies (list) ->
-    #   movies = html('')
+  # searchByID('tt1285016')
 
 
-  # inputText = (string) ->
-    # str = $("form").serialize()
-  $('#form1').on 'submit', (event) ->
+  $('#formSearch').on 'submit', (event) ->
     event.preventDefault()
     movieSearch = $('#titleContains').val()
-    # alert 'Hello'
-      # console.log movieSearch
-    # e.console.log form
-    # e.console.log input
     master movieSearch
