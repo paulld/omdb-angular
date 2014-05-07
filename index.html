@@ -7,7 +7,6 @@
   <!-- <link rel="stylesheet" href="css/foundation.css" /> -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css" />
-  <script src="js/vendor/modernizr.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="main.js"></script>
 
@@ -19,44 +18,58 @@
     <![endif]-->
 </head>
 <body>
-<h1>Search the OMDB Database</h1>
-<!-- INPUT NEW TITLE -->
-  <div class="container">
-    <div class="row">
-      <form id="formSearch" class="form-search">
-          <div class="col-md-3">&nbsp;</div>
-          <div class="col-md-4">
-            <input type="text" class="form-control" id="titleContains" placeholder="Title contains:">
+  <main>
+    <h1>Search the OMDB Database</h1>
+
+    <div class="container">
+      <div class="row">
+        <form id="formSearch" class="form-search">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-4">
+              <input type="text" class="form-control" id="titleContains" placeholder="Title contains:">
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+            </div>
+            <div class="col-md-3">&nbsp;</div>
+        </form>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Title</h3>
+        </div>
+        <div class="col-md-2">
+          <h3>Year</h3>
+        </div>
+        <div class="col-md-2">
+          <h3>Type</h3>
+        </div>
+        <div class="col-md-2">
+          <h3>imdbID</h3>
+        </div>
+      </div>  
+
+      <div class="movieAll">
+        <!-- List of Movies goes here -->
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <h3>Plot</h3>
+          <p class="moviePlot">
+            <!-- Movie Plot goes here -->
+          </p>
+        </div>
+        <div class="col-md-4">
+          <h3>Poster</h3>
+          <div class="moviePoster">
+            <!-- Movie Poster goes here -->
           </div>
-          <div class="col-md-2">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
-          </div>
-          <div class="col-md-3">&nbsp;</div>
-      </form>
+        </div>
+      </div>
     </div>
-
-<!-- SHOW TITLES IN COLUMNS -->
-
-
-    <div class="row">
-      <div class="col-md-6">
-        <h3>Title</h3>
-      </div>
-      <div class="col-md-2">
-        <h3>Year</h3>
-      </div>
-      <div class="col-md-2">
-        <h3>Type</h3>
-      </div>
-      <div class="col-md-2">
-        <h3>imdbID</h3>
-      </div>
-    </div>  
-    <div class="movieAll">
-
-    </div>
-  </div>
-
+  </main>
   <!--
       <!- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
