@@ -3,6 +3,9 @@ $ ->
   # clearMovies = (list) ->
   #   list = html('')
 
+  $('#list-head').hide()
+  $('#details-head h3').hide()
+
   master = (title) ->
     $.ajax
       url: "http://www.omdbapi.com/?s=#{title}"
@@ -11,25 +14,31 @@ $ ->
       # console.log movies
       $('.tempList').remove()
       # $(".movieAll").html ''
+      $('#details-head').hide()
+      $('#list-head').show()
       for movie in movies
-        $(".movieAll").append "<div class=\"row\">
-                                <div class=\"col-md-6\">
-                            <span class=\"tempList\" data-imdb=#{movie.imdbID}>
-                                    #{movie.Title}</span>
-                                </div>
-                                <div class=\"col-md-2\">
-                            <span class=\"tempList\" data-imdb=#{movie.imdbID}>
-                                    #{movie.Year}</span>
-                                </div>
-                                <div class=\"col-md-2\">
-                            <span class=\"tempList\" data-imdb=#{movie.imdbID}>
-                                    #{movie.Type}</span>
-                                </div>
-                                <div class=\"col-md-2\">
-                            <span class=\"tempList\" data-imdb=#{movie.imdbID}>
-                                    #{movie.imdbID}<span>
-                                </div>
-                              </div>"
+        movieList = $("<div class=\"row\">
+                      <div class=\"col-md-6\">
+                        <span class=\"tempList\" data-imdb=#{movie.imdbID}>
+                          #{movie.Title}
+                        </span>
+                      </div>
+                      <div class=\"col-md-2\">
+                        <span class=\"tempList\" data-imdb=#{movie.imdbID}>
+                          #{movie.Year}
+                        </span>
+                      </div>
+                      <div class=\"col-md-2\">
+                        <span class=\"tempList\" data-imdb=#{movie.imdbID}>
+                          #{movie.Type}
+                        </span>
+                      </div>
+                      <div class=\"col-md-2\">
+                        <span class=\"tempList\" data-imdb=#{movie.imdbID}>
+                          #{movie.imdbID}<span>
+                      </div>
+                    </div>")
+        $(".movieAll").append movieList
 
 
   searchByID = (imdbID) ->
@@ -37,12 +46,32 @@ $ ->
       url: "http://www.omdbapi.com/?i=#{imdbID}&tomatoes=true&plot=full"
     .done (data) ->
       movie = $.parseJSON(data)
-      $('.tempPlot').remove()
-      $(".moviePlot").append "<div class=\"tempPlot\">#{movie.Plot}</div>"
-      $('.tempPoster').remove()
-      $(".moviePoster").append "<div class=\"tempPoster\">
-                                  <img src=\"#{movie.Poster}\">
-                                </div>"
+      $('#details-head').find('h3').show()
+      movieDirector = $("<span class=\"temp-details\">#{movie.Director}</span>")
+      movieActors = $("<span class=\"temp-details\">#{movie.Actors}</span>")
+      movieGenre = $("<span class=\"temp-details\">#{movie.Genre}</span>")
+      movieRuntime = $("<span class=\"temp-details\">#{movie.Runtime}</span>")
+      movieCountry = $("<span class=\"temp-details\">#{movie.Country}</span>")
+      movieLanguages = $("<span class=\"temp-details\">#{movie.Languages}</span>")
+      movieImdbRating = $("<span class=\"temp-details\">#{movie.ImdbRating}</span>")
+      movieAwards = $("<span class=\"temp-details\">#{movie.Awards}</span>")
+
+      moviePlot = $("<span class=\"temp-details\">#{movie.Plot}</span>")
+      moviePoster = $("<span class=\"temp-details\"><img src=\"#{movie.Poster}\"></span>")
+      
+      $('#details-head').show()
+      $(".temp-details").remove()
+
+      $(".movie-director").append movieDirector
+      $(".movie-actors").append movieActors
+      $(".movie-genre").append movieGenre
+      $(".movie-runtime").append movieRuntime
+      $(".movie-country").append movieCountry
+      $(".movie-languages").append movieLanguages
+      $(".movie-imdbrating").append movieImdbRating
+      $(".movie-awards").append movieAwards
+      $(".movie-plot").append moviePlot
+      $(".movie-poster").append moviePoster
 
   # searchByID("tt1285016")
   # searchByID

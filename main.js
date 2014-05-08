@@ -2,17 +2,22 @@
 (function() {
   $(function() {
     var master, searchByID;
+    $('#list-head').hide();
+    $('#details-head h3').hide();
     master = function(title) {
       return $.ajax({
         url: "http://www.omdbapi.com/?s=" + title
       }).done(function(data) {
-        var movie, movies, _i, _len, _results;
+        var movie, movieList, movies, _i, _len, _results;
         movies = $.parseJSON(data)['Search'];
         $('.tempList').remove();
+        $('#details-head').hide();
+        $('#list-head').show();
         _results = [];
         for (_i = 0, _len = movies.length; _i < _len; _i++) {
           movie = movies[_i];
-          _results.push($(".movieAll").append("<div class=\"row\"> <div class=\"col-md-6\"> <span class=\"tempList\" data-imdb=" + movie.imdbID + "> " + movie.Title + "</span> </div> <div class=\"col-md-2\"> <span class=\"tempList\" data-imdb=" + movie.imdbID + "> " + movie.Year + "</span> </div> <div class=\"col-md-2\"> <span class=\"tempList\" data-imdb=" + movie.imdbID + "> " + movie.Type + "</span> </div> <div class=\"col-md-2\"> <span class=\"tempList\" data-imdb=" + movie.imdbID + "> " + movie.imdbID + "<span> </div> </div>"));
+          movieList = $("<div class=\"row\"> <div class=\"col-md-6\"> <span class=\"tempList\" data-imdb=" + movie.imdbID + "> " + movie.Title + " </span> </div> <div class=\"col-md-2\"> <span class=\"tempList\" data-imdb=" + movie.imdbID + "> " + movie.Year + " </span> </div> <div class=\"col-md-2\"> <span class=\"tempList\" data-imdb=" + movie.imdbID + "> " + movie.Type + " </span> </div> <div class=\"col-md-2\"> <span class=\"tempList\" data-imdb=" + movie.imdbID + "> " + movie.imdbID + "<span> </div> </div>");
+          _results.push($(".movieAll").append(movieList));
         }
         return _results;
       });
@@ -21,12 +26,31 @@
       return $.ajax({
         url: "http://www.omdbapi.com/?i=" + imdbID + "&tomatoes=true&plot=full"
       }).done(function(data) {
-        var movie;
+        var movie, movieActors, movieAwards, movieCountry, movieDirector, movieGenre, movieImdbRating, movieLanguages, moviePlot, moviePoster, movieRuntime;
         movie = $.parseJSON(data);
-        $('.tempPlot').remove();
-        $(".moviePlot").append("<div class=\"tempPlot\">" + movie.Plot + "</div>");
-        $('.tempPoster').remove();
-        return $(".moviePoster").append("<div class=\"tempPoster\"> <img src=\"" + movie.Poster + "\"> </div>");
+        $('#details-head').find('h3').show();
+        movieDirector = $("<span class=\"temp-details\">" + movie.Director + "</span>");
+        movieActors = $("<span class=\"temp-details\">" + movie.Actors + "</span>");
+        movieGenre = $("<span class=\"temp-details\">" + movie.Genre + "</span>");
+        movieRuntime = $("<span class=\"temp-details\">" + movie.Runtime + "</span>");
+        movieCountry = $("<span class=\"temp-details\">" + movie.Country + "</span>");
+        movieLanguages = $("<span class=\"temp-details\">" + movie.Languages + "</span>");
+        movieImdbRating = $("<span class=\"temp-details\">" + movie.ImdbRating + "</span>");
+        movieAwards = $("<span class=\"temp-details\">" + movie.Awards + "</span>");
+        moviePlot = $("<span class=\"temp-details\">" + movie.Plot + "</span>");
+        moviePoster = $("<span class=\"temp-details\"><img src=\"" + movie.Poster + "\"></span>");
+        $('#details-head').show();
+        $(".temp-details").remove();
+        $(".movie-director").append(movieDirector);
+        $(".movie-actors").append(movieActors);
+        $(".movie-genre").append(movieGenre);
+        $(".movie-runtime").append(movieRuntime);
+        $(".movie-country").append(movieCountry);
+        $(".movie-languages").append(movieLanguages);
+        $(".movie-imdbrating").append(movieImdbRating);
+        $(".movie-awards").append(movieAwards);
+        $(".movie-plot").append(moviePlot);
+        return $(".movie-poster").append(moviePoster);
       });
     };
     $('#formSearch').on('submit', function(event) {
