@@ -58,7 +58,13 @@
       movieSearch = $('#titleContains').val();
       return master(movieSearch);
     });
-    return $('body').delegate('span', 'click', function(event) {
+    $('.movieAll').delegate('.row', 'mouseover', function(event) {
+      return $(this).addClass('highlighted');
+    });
+    $('.movieAll').delegate('.row', 'mouseleave', function(event) {
+      return $(this).removeClass('highlighted');
+    });
+    return $('.movieAll').delegate('.row', 'click', function(event) {
       var imdbID;
       imdbID = $(event.target).data('imdb');
       return searchByID(imdbID);

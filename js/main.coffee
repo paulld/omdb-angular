@@ -44,6 +44,7 @@ $ ->
       movie = $.parseJSON(data)
       $('#details-head').find('h3').show()
       movieDirector = $("<span>#{movie.Director}</span>")
+      # movieActors = $("<span>#{movie.Actors}</span>").split(', ')
       movieActors = $("<span>#{movie.Actors}</span>")
       movieGenre = $("<span>#{movie.Genre}</span>")
       movieRuntime = $("<span>#{movie.Runtime}</span>")
@@ -55,9 +56,12 @@ $ ->
       moviePlot = $("<span>#{movie.Plot}</span>")
       moviePoster = $("<span><img src=\"#{movie.Poster}\"></span>")
       
+      # console.log movieActors
+
       $('#details-head').show()
 
       $(".movie-director").html(movieDirector)
+      # $(".movie-actors").html(movieActors[1])
       $(".movie-actors").html(movieActors)
       $(".movie-genre").html(movieGenre)
       $(".movie-runtime").html(movieRuntime)
@@ -73,9 +77,15 @@ $ ->
     movieSearch = $('#titleContains').val()
     master movieSearch
 
-  $('body').delegate 'span', 'click', (event) ->
-    # event.preventDefault()
+  # $('body').delegate 'span', 'click', (event) ->
+    # imdbID = $(event.target).data('imdb')
+    # searchByID imdbID
+
+  $('.movieAll').delegate '.row', 'mouseover', (event) ->
+    $(@).addClass('highlighted')
+  $('.movieAll').delegate '.row', 'mouseleave', (event) ->
+    $(@).removeClass('highlighted')
+    
+  $('.movieAll').delegate '.row', 'click', (event) ->
     imdbID = $(event.target).data('imdb')
     searchByID imdbID
-
-    
