@@ -1,4 +1,5 @@
-omdb-angular
+Omdb-API / angular
 ============
 
-Fetch the OMDB API with Angular APp
+Simple App using the [Omdb API](http://www.omdbapi.com/) to do cool movie queries.
+Used AngularJS.
